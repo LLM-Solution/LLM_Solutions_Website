@@ -1,91 +1,131 @@
-/* Reset some default browser styles */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Sombre */
+    color: #e0e0e0; /* Texte clair */
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    padding-top: 50px;
 }
 
-/* Styling for the navigation bar */
-nav {
-    background-color: #333;
-    padding: 10px 0;
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
-nav ul {
-    list-style: none;
+header.main-header {
+    background-color: #121212;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.main-header .logo h1 {
+    color: #e0e0e0;
+    font-size: 1.8rem;
+}
+
+.main-header nav ul {
+    list-style-type: none;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
-nav ul li {
-    margin: 0 15px;
+.main-header nav ul li {
+    margin-left: 20px;
 }
 
-nav ul li a {
-    color: white;
+.main-header nav ul li a {
     text-decoration: none;
-    font-size: 18px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: color 0.3s;
 }
 
-nav ul li a:hover {
+.main-header nav ul li a:hover {
+    color: #ff9800;
+}
+
+.hero-section {
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.services-section,
+.about-section,
+.contact-section {
+    padding: 60px 0;
+    background-color: #1e1e1e;
+    margin-bottom: 20px;
+}
+
+.services-section h2,
+.about-section h2,
+.contact-section h2 {
+    color: #ff9800;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.service-item {
+    margin-bottom: 40px;
+}
+
+.service-item h3 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.main-footer {
+    background-color: #121212;
+    padding: 20px 0;
+    text-align: center;
+    color: #999;
+}
+
+.main-footer a {
+    color: #ff9800;
+    text-decoration: none;
+}
+
+.main-footer a:hover {
     text-decoration: underline;
 }
 
-/* Main section styling */
-section {
-    text-align: center;
-    margin-top: 50px;
-}
-
-h1 {
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #555;
-}
-
-a {
-    display: inline-block;
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-a:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive design for mobile devices */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 28px;
+/* Typing cursor effect */
+/*@keyframes blink {
+    0% {
+        opacity: 1;
     }
-
-    p {
-        font-size: 18px;
+    50% {
+        opacity: 0;
     }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    nav ul li {
-        margin: 10px 0;
+    100% {
+        opacity: 1;
     }
 }
+
+.hero-section h2::after {
+    content: '|';
+    font-weight: bold;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+    color: #ff9800; /* Same color as your highlighted elements */
+/*}*/

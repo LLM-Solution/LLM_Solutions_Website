@@ -1,51 +1,47 @@
-// Content for both French and English languages
-const translations = {
-    fr: {
-        title: "IA personnalisée pour les entreprises",
-        description: "Nous créons des intelligences artificielles sur mesure, adaptées à vos besoins et à vos données privées.",
-        cta: "Contactez-nous pour une démo",
-        nav: {
-            home: "Accueil",
-            about: "À propos",
-            services: "Services",
-            contact: "Contact",
-            langSwitch: "English"
-        }
-    },
-    en: {
-        title: "Custom AI for Businesses",
-        description: "We create custom-made artificial intelligence solutions, tailored to your needs and private data.",
-        cta: "Contact us for a demo",
-        nav: {
-            home: "Home",
-            about: "About",
-            services: "Services",
-            contact: "Contact",
-            langSwitch: "Français"
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Typing effect function for multiple elements
+function typeWriter(element, text, speed, callback) {
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        } else if (callback) {
+            callback(); // Call the next typing function once this one is done
         }
     }
-};
-
-// Function to switch language
-function switchLanguage(language) {
-    document.querySelector('h1').textContent = translations[language].title;
-    document.querySelector('p').textContent = translations[language].description;
-    document.querySelector('a').textContent = translations[language].cta;
-    
-    // Update navigation text
-    const navItems = document.querySelectorAll('nav ul li a');
-    navItems[0].textContent = translations[language].nav.home;
-    navItems[1].textContent = translations[language].nav.about;
-    navItems[2].textContent = translations[language].nav.services;
-    navItems[3].textContent = translations[language].nav.contact;
-    navItems[4].textContent = translations[language].nav.langSwitch;
+    type();
 }
 
-// Event listener for language switch
-document.getElementById('switch-lang').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor behavior
-    
-    // Get current language from the button text and switch
-    const currentLanguage = this.textContent === "English" ? "en" : "fr";
-    switchLanguage(currentLanguage);
+// Sequential typing effect
+function applyTypingEffect() {
+    const elementsToAnimate = document.querySelectorAll('.typewriter'); // Select all elements with class "typewriter"
+    let currentElement = 0;
+
+    function startTypingNextElement() {
+        if (currentElement < elementsToAnimate.length) {
+            const element = elementsToAnimate[currentElement];
+            const text = element.textContent;
+            element.textContent = ''; // Clear the text initially
+            typeWriter(element, text, 10, startTypingNextElement); // Start typing the next element when done
+            currentElement++;
+        }
+    }
+
+    startTypingNextElement(); // Start with the first element
+}
+
+// When the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    applyTypingEffect();
 });
