@@ -1,47 +1,45 @@
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+/*
+* @Author: ArthurBernard
+* @Date:   2024-09-26 10:04:00
+* @Last Modified by:   ArthurBernard
+* @Last Modified time: 2024-09-26 15:49:42
+*/
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+// Items selection
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.main-header nav');
+const navLinks = document.querySelectorAll('.main-nav a');
+
+// Fonction pour basculer l'affichage du menu
+function toggleMenu() {
+    nav.classList.toggle('nav-open');
+    menuToggle.classList.toggle('active');
+
+    // Mise à jour de l'attribut aria-expanded pour l'accessibilité
+    const isOpen = nav.classList.contains('nav-open');
+    menuToggle.setAttribute('aria-expanded', isOpen);
+    menuToggle.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+}
+
+// Ajouter un écouteur d'événement sur le bouton du menu
+menuToggle.addEventListener('click', toggleMenu);
+
+// Fermer le menu lorsque l'on clique sur un lien
+navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+        // Vérifie si le menu est ouvert
+        if (nav.classList.contains('nav-open')) {
+            toggleMenu();
+        }
     });
 });
 
-// Typing effect function for multiple elements
-function typeWriter(element, text, speed, callback) {
-    let i = 0;
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        } else if (callback) {
-            callback(); // Call the next typing function once this one is done
-        }
+// Fermer le menu lorsqu'on clique en dehors
+document.addEventListener('click', (event) => {
+    const isClickInsideMenu = nav.contains(event.target);
+    const isClickOnMenuToggle = menuToggle.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnMenuToggle && nav.classList.contains('nav-open')) {
+        toggleMenu();
     }
-    type();
-}
-
-// Sequential typing effect
-function applyTypingEffect() {
-    const elementsToAnimate = document.querySelectorAll('.typewriter'); // Select all elements with class "typewriter"
-    let currentElement = 0;
-
-    function startTypingNextElement() {
-        if (currentElement < elementsToAnimate.length) {
-            const element = elementsToAnimate[currentElement];
-            const text = element.textContent;
-            element.textContent = ''; // Clear the text initially
-            typeWriter(element, text, 10, startTypingNextElement); // Start typing the next element when done
-            currentElement++;
-        }
-    }
-
-    startTypingNextElement(); // Start with the first element
-}
-
-// When the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
-    applyTypingEffect();
 });
