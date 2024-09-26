@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-09-26 15:49:42
+* @Last Modified time: 2024-09-26 17:34:32
 */
 
 // Items selection
@@ -42,4 +42,29 @@ document.addEventListener('click', (event) => {
     if (!isClickInsideMenu && !isClickOnMenuToggle && nav.classList.contains('nav-open')) {
         toggleMenu();
     }
+});
+
+// Sélectionner toutes les sections avec la classe 'fade-in'
+const faders = document.querySelectorAll('.fade-in');
+
+// Options de l'Intersection Observer
+const appearOptions = {
+    threshold: 0.1, // Pourcentage de visibilité avant de déclencher
+    rootMargin: "0px 0px -50px 0px" // Ajustement pour déclencher un peu avant
+};
+
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+            return;
+        } else {
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target); // Arrêter d'observer une fois l'animation lancée
+        }
+    });
+}, appearOptions);
+
+// Observer chaque élément
+faders.forEach(fader => {
+    appearOnScroll.observe(fader);
 });

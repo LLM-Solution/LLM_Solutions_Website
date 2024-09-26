@@ -2,17 +2,31 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-09-26 15:39:40
+* @Last Modified time: 2024-09-26 17:34:39
 */
 
 :root {
-    --primary-color: #ff9800;      /* Orange */
-    --background-color: #1a1a1a;   /* Dark */
-    --secondary-bg-color: #1e1e1e; /**/
-    --header-bg-color: #121212;    /**/
-    --text-color: #e0e0e0;         /* White */
-    --hover-color: #ffa733;        /* Orange */
+    --primary-color: #eaf6fe;      /* White-blue-grey ++ */
+    --background-color: #1a1a1a;   /* Dark -- */
+    --secondary-bg-color: #1e1e1e; /* Dark */
+    --header-bg-color: #121212;    /* Dark ++ */
+    --text-color: #a1b2bd;         /* White-blue-grey -- */
+    --hover-color: #ced9ff;        /* White-blue-grey */
     --font-family: Arial, sans-serif;
+    --header-height: 118px; /* Hauteur du header */
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --primary-color: #1a1a1a;        /* Gris très foncé pour les titres et éléments importants */
+        --background-color: #f5f5f5;     /* Gris très clair pour le fond général */
+        --header-bg-color: #ffffff;      /* Blanc pur pour les sections ou conteneurs */
+        --secondary-bg-color: #e0e0e0;   /* Gris clair pour le header */
+        --text-color: #333333;           /* Gris foncé pour le texte */
+        --hover-color: #007BFF;          /* Bleu vif pour les effets hover */
+        --font-family: Arial, sans-serif;
+        --header-height: 118px; /* Hauteur du header */
+    }
 }
 
 /* Reset */
@@ -31,7 +45,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    margin-top: 7rem; /* 118px compensate for the header size */
+    margin-top: var(--header-height); /* 118px compensate for the header size */
 }
 
 .container {
@@ -48,12 +62,12 @@ header.main-header {
     top: 0;
     left: 0;
     z-index: 1000;
-    height: 7rem; /*118px*/ 
+    height: var(--header-height); /*118px*/ 
     box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.3);
 }
 
 .main-header .logo h1 {
-    color: var(--text-color);
+    color: var(--primary-color);
     font-size: 1.8rem; /* 28.8px */
 }
 
@@ -74,7 +88,7 @@ header.main-header {
 
 .main-header nav ul li a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--primary-color);
     font-size: 1rem; /* 16px */
     transition: color 0.3s;
 }
@@ -86,8 +100,8 @@ header.main-header {
 .hero {
     padding: 0px 20%;
     text-align: center;
-    color: #fff;
-    height: calc(100vh - 4.375rem);
+    color: --var(--primary-color);
+    height: calc(100vh - var(--header-height));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,7 +118,7 @@ header.main-header {
 .hero h2 {
     font-size: 2.5rem; /* 40px */
     margin-bottom: 3.125rem; /* 50px */
-    color: var(--text-color);
+    color: var(--primary-color);
 }
 
 h2 {
@@ -118,8 +132,8 @@ h2 {
 .contact {
     padding: 3.75rem 0; /* 60px */
     background-color: var(--secondary-bg-color);
-    margin-bottom: 1.25rem; /* 20px */
-    min-height: calc(100vh - 4.375rem);
+    margin-bottom: 0rem; /* 0px */
+    min-height: calc(100vh - var(--header-height));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,6 +200,18 @@ a:hover {
         display: block;
     }
 
+    header.main-header {
+        height: auto;
+    }
+
+    :root {
+        --header-height: 12rem;
+    }
+
+    body {
+        margin-top: var(--header-height);
+    }
+
     .main-header nav {
         display: none;
         max-height: 0;
@@ -194,7 +220,7 @@ a:hover {
     .main-header nav.nav-open {
         display: block;
         position: absolute;
-        top: 4.375rem; /* Hauteur du header */
+        top: var(--header-height); /* Hauteur du header */
         left: 0;
         width: 100%;
         background-color: var(--header-bg-color);
@@ -221,4 +247,15 @@ a:hover {
     .menu-toggle.active .bar:nth-child(3) {
         transform: translateY(-0.55rem) rotate(-45deg);
     }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
 }
