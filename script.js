@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-09-26 17:34:32
+* @Last Modified time: 2024-09-26 18:21:27
 */
 
 // Items selection
@@ -67,4 +67,29 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer) {
 // Observer chaque élément
 faders.forEach(fader => {
     appearOnScroll.observe(fader);
+});
+
+// Sélection du bouton de changement de thème
+const themeToggle = document.getElementById('theme-toggle');
+
+// Vérifier le thème actuel dans le stockage local ou par défaut
+let currentTheme = localStorage.getItem('theme') || 'dark';
+
+// Fonction pour appliquer le thème
+function applyTheme(theme) {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    localStorage.setItem('theme', theme);
+}
+
+// Appliquer le thème au chargement de la page
+applyTheme(currentTheme);
+
+// Écouteur d'événement pour le bouton de changement de thème
+themeToggle.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(currentTheme);
 });
