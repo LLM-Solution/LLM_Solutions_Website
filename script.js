@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-09-26 18:21:27
+* @Last Modified time: 2024-10-02 17:12:34
 */
 
 // Items selection
@@ -92,4 +92,20 @@ applyTheme(currentTheme);
 themeToggle.addEventListener('click', () => {
     currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
     applyTheme(currentTheme);
+});
+
+// Sélectionner tous les boutons pour montrer les exemples
+const exampleButtons = document.querySelectorAll('.show-example');
+
+// Ajouter un événement au survol pour chaque bouton
+exampleButtons.forEach(button => {
+    button.addEventListener('mouseover', () => {
+        const usageBox = button.nextElementSibling;
+        usageBox.style.display = 'block';
+    });
+
+    button.addEventListener('mouseout', () => {
+        const usageBox = button.nextElementSibling;
+        usageBox.style.display = 'none';
+    });
 });
