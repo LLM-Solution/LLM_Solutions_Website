@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-03 17:53:50
+* @Last Modified time: 2024-10-03 18:07:57
 */
 
 :root {
@@ -172,6 +172,7 @@ h2 {
 }
 
 .services,
+.privacy,
 .about,
 .contact {
     padding: 3.75rem 20%; /* 60px */
@@ -235,6 +236,15 @@ h2 {
 
 .service-item:hover .card {
     transform: rotateX(180deg); /* flip the card */
+}
+
+.privacy ul {
+    padding-left: 3rem;
+    padding-bottom: 1rem;
+}
+
+.privacy li {
+    padding-bottom: 1rem;
 }
 
 p {
@@ -301,6 +311,7 @@ a:hover {
 @media (max-width: 768px) {
     .hero,
     .services,
+    .privacy,
     .about,
     .contact {
         padding: 3.75rem 5%;
