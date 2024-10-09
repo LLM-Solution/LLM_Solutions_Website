@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-09 17:18:31
+* @Last Modified time: 2024-10-09 17:42:00
 */
 
 // Select items
@@ -112,32 +112,29 @@ exampleButtons.forEach(button => {
 
 // Cookies and Google Analytics
 document.addEventListener("DOMContentLoaded", function() {
-  // By default, load Google Analytics
-  if (!localStorage.getItem("cookieConsent")) {
+  let cookieConsent = localStorage.getItem("cookieConsent");
+
+  if (cookieConsent === null) {
+    document.getElementById("cookieConsent").style.display = "block";
     localStorage.setItem("cookieConsent", "true");
     loadGoogleAnalytics();
-  }
-
-  // Display pop up to refuse cookies
-  if (localStorage.getItem("cookieConsent") !== "false") {
-    document.getElementById("cookieConsent").style.display = "block";
+  } else if (cookieConsent === "true") {
+    loadGoogleAnalytics();
+  } else if (cookieConsent === "false") {
+    document.getElementById("cookieConsent").style.display = "none";
   }
 
   document.getElementById("acceptCookie").addEventListener("click", function() {
     localStorage.setItem("cookieConsent", "true");
     document.getElementById("cookieConsent").style.display = "none";
+    loadGoogleAnalytics();
   });
 
   document.getElementById("declineCookie").addEventListener("click", function() {
     localStorage.setItem("cookieConsent", "false");
     document.getElementById("cookieConsent").style.display = "none";
-    // Delete Google Analytics if user refuse cookies
     removeGoogleAnalytics();
   });
-  
-  if (localStorage.getItem("cookieConsent") === "true") {
-    loadGoogleAnalytics(); // Load Google Analytics if user already agree
-  }
 });
 
 function removeGoogleAnalytics() {
