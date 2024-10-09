@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-03 18:16:41
+* @Last Modified time: 2024-10-09 17:18:31
 */
 
 // Select items
@@ -109,3 +109,55 @@ exampleButtons.forEach(button => {
         usageBox.style.display = 'none';
     });
 });
+
+// Cookies and Google Analytics
+document.addEventListener("DOMContentLoaded", function() {
+  // By default, load Google Analytics
+  if (!localStorage.getItem("cookieConsent")) {
+    localStorage.setItem("cookieConsent", "true");
+    loadGoogleAnalytics();
+  }
+
+  // Display pop up to refuse cookies
+  if (localStorage.getItem("cookieConsent") !== "false") {
+    document.getElementById("cookieConsent").style.display = "block";
+  }
+
+  document.getElementById("acceptCookie").addEventListener("click", function() {
+    localStorage.setItem("cookieConsent", "true");
+    document.getElementById("cookieConsent").style.display = "none";
+  });
+
+  document.getElementById("declineCookie").addEventListener("click", function() {
+    localStorage.setItem("cookieConsent", "false");
+    document.getElementById("cookieConsent").style.display = "none";
+    // Delete Google Analytics if user refuse cookies
+    removeGoogleAnalytics();
+  });
+  
+  if (localStorage.getItem("cookieConsent") === "true") {
+    loadGoogleAnalytics(); // Load Google Analytics if user already agree
+  }
+});
+
+function removeGoogleAnalytics() {
+  var scripts = document.querySelectorAll('script[src*="googletagmanager.com/gtag/js"]');
+  scripts.forEach(function(script) {
+    script.parentNode.removeChild(script);
+  });
+  window['ga-disable-G-5MD3JTC1RT'] = true;
+}
+
+function loadGoogleAnalytics() {
+  var script = document.createElement("script");
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-5MD3JTC1RT";
+  document.head.appendChild(script);
+
+  script.onload = function() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5MD3JTC1RT');
+  };
+}
