@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-09 17:15:01
+* @Last Modified time: 2024-10-09 18:17:23
 */
 
 :root {
@@ -72,8 +72,8 @@ body {
   bottom: 20px;
   left: 20px;
   right: 20px;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--header-bg-color);
+  color: var(--primary-color);
   padding: 15px;
   z-index: 1000;
   border-radius: 5px;
