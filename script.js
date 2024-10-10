@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-09 17:42:00
+* @Last Modified time: 2024-10-10 08:55:04
 */
 
 // Select items
@@ -116,24 +116,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (cookieConsent === null) {
     document.getElementById("cookieConsent").style.display = "block";
-    localStorage.setItem("cookieConsent", "true");
-    loadGoogleAnalytics();
   } else if (cookieConsent === "true") {
     loadGoogleAnalytics();
-  } else if (cookieConsent === "false") {
-    document.getElementById("cookieConsent").style.display = "none";
   }
 
   document.getElementById("acceptCookie").addEventListener("click", function() {
     localStorage.setItem("cookieConsent", "true");
     document.getElementById("cookieConsent").style.display = "none";
-    loadGoogleAnalytics();
+    loadGoogleAnalytics(); // Charge Google Analytics après acceptation
   });
 
   document.getElementById("declineCookie").addEventListener("click", function() {
     localStorage.setItem("cookieConsent", "false");
     document.getElementById("cookieConsent").style.display = "none";
-    removeGoogleAnalytics();
   });
 });
 
