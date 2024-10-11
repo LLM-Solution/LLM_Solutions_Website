@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-09 18:17:23
+* @Last Modified time: 2024-10-11 10:28:13
 */
 
 :root {
@@ -77,6 +77,8 @@ body {
   padding: 15px;
   z-index: 1000;
   border-radius: 5px;
+  opacity: 0;
+  transition: opacity 2s ease;
 }
 
 #cookieContent {

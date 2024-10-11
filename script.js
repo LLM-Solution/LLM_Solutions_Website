@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-10 08:55:04
+* @Last Modified time: 2024-10-11 10:26:45
 */
 
 // Select items
@@ -114,10 +114,19 @@ exampleButtons.forEach(button => {
 document.addEventListener("DOMContentLoaded", function() {
   let cookieConsent = localStorage.getItem("cookieConsent");
 
-  if (cookieConsent === null) {
+  /*if (cookieConsent === null) {
     document.getElementById("cookieConsent").style.display = "block";
   } else if (cookieConsent === "true") {
     loadGoogleAnalytics();
+  }*/
+  if (cookieConsent === null) {
+    const cookieBanner = document.getElementById("cookieConsent");
+    cookieBanner.style.display = "block"; // Rendre le pop-up visible
+    setTimeout(() => {
+      cookieBanner.style.opacity = "1"; // Faire apparaître progressivement
+    }, 100); // Légère attente pour s'assurer que l'élément est visible avant de commencer le fondu
+  } else if (cookieConsent === "true") {
+    loadGoogleAnalytics(); // Charge Google Analytics si l'utilisateur a déjà consenti
   }
 
   document.getElementById("acceptCookie").addEventListener("click", function() {
