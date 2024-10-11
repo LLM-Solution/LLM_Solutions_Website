@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-11 10:39:28
+* @Last Modified time: 2024-10-11 10:49:04
 */
 
 :root {
@@ -68,58 +68,60 @@ body {
 }
 
 #cookieConsent {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  background-color: var(--header-bg-color);
-  color: var(--primary-color);
-  padding: 15px;
-  z-index: 1000;
-  border-radius: 5px;
-  opacity: 0;
-  transition: opacity 2s ease;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: var(--header-bg-color);
+    color: var(--primary-color);
+    padding: 15px;
+    z-index: 1000;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 2s ease;
 }
 
 #cookieContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 #buttonContainer {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 
 #acceptCookie, #declineCookie {
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
 #acceptCookie {
-  background-color: #4caf50;
-  color: #fff;
-  border: 2px solid #388e3c;
+    background-color: #388e3c;
+    color: #fff;
+    border: 2px solid #4caf50;
 }
 
 #declineCookie {
-  background-color: #f44336;
-  color: #fff;
-  border: 2px solid #d32f2f;
+    background-color: #d32f2f;
+    color: #fff;
+    border: 2px solid #f44336;
 }
 
 #acceptCookie:hover {
-  background-color: #388e3c;
+    background-color: #4caf50;
+    border: 2px solid #388e3c;
 }
 
 #declineCookie:hover {
-    background-color: #d32f2f;
+    background-color: #f44336;
+    border: 2px solid #d32f2f;
 }
 
 .container {
