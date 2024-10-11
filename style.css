@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-11 10:49:04
+* @Last Modified time: 2024-10-11 11:06:44
 */
 
 :root {
@@ -103,15 +103,15 @@ body {
 }
 
 #acceptCookie {
-    background-color: #388e3c;
+    background-color: #38843c; /*#388e3c;*/
     color: #fff;
-    border: 2px solid #4caf50;
+    border: 2px solid #2b642d; /*#4caf50;*/
 }
 
 #declineCookie {
-    background-color: #d32f2f;
+    background-color: #ea1a0b; /*#d32f2f;*/
     color: #fff;
-    border: 2px solid #f44336;
+    border: 2px solid #b2110b; /*#f44336;*/
 }
 
 #acceptCookie:hover {
