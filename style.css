@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-11 10:28:13
+* @Last Modified time: 2024-10-11 10:39:28
 */
 
 :root {
@@ -99,16 +99,27 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 3px;
+  font-weight: bold;
 }
 
 #acceptCookie {
   background-color: #4caf50;
   color: #fff;
+  border: 2px solid #388e3c;
 }
 
 #declineCookie {
   background-color: #f44336;
   color: #fff;
+  border: 2px solid #d32f2f;
+}
+
+#acceptCookie:hover {
+  background-color: #388e3c;
+}
+
+#declineCookie:hover {
+    background-color: #d32f2f;
 }
 
 .container {
