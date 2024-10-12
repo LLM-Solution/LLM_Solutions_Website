@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-11 11:06:44
+* @Last Modified time: 2024-10-11 14:57:30
 */
 
 :root {
@@ -11,7 +11,7 @@
     --secondary-bg-color: #1e1e1e; /* Dark */
     --header-bg-color: #121212;    /* Darker ++ */
     --text-color: #a1b2bd;         /* Light blue-grey -- */
-    --hover-color: #ced9ff;        /* Light blue-grey */
+    --hover-color: #9cc5df;        /* Light blue-grey */
     --font-family: Arial, sans-serif;
     --header-height: 118px; /* Header height */
 }
@@ -324,6 +324,10 @@ p {
     max-width: 1200px; /* Optional: define a max-width for layout consistency */
     margin: 0 auto; /* Ensure container is centered within the footer */
     padding: 1rem;
+}
+
+.main-footer .container p {
+    padding: 0.25rem;
 }
 
 a {
