@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-24 16:41:36
+* @Last Modified time: 2024-10-24 17:34:17
 */
 
 :root {
@@ -129,6 +129,7 @@ body {
     width: 90%;
     margin: 0 auto;
     max-width: 75rem; /* 1200px */
+    text-align: center;
 }
 
 header.main-header {
@@ -296,6 +297,35 @@ h2 {
 
 .service-item:hover .card {
     transform: rotateX(180deg); /* flip the card */
+}
+
+/* ChatBotSection */
+
+.btn {
+    padding: 1rem;
+    margin: 0rem;
+    background-color: var(--background-color);
+    border: none;
+    color: var(--primary-color);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+    /*background-color: var(--hover-color);*/
+    color: var(--hover-color);
+    filter: brightness(150%);
+}
+
+.chatbot a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.chatbot a:hover {
+    text-decoration: none;
+    color: var(--hover-color);
 }
 
 /* Privacy */

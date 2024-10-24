@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-11 10:26:45
+* @Last Modified time: 2024-10-24 23:56:00
 */
 
 // Select items
@@ -161,4 +161,99 @@ function loadGoogleAnalytics() {
     gtag('js', new Date());
     gtag('config', 'G-5MD3JTC1RT');
   };
+}
+
+
+// MiniChatBot
+document.getElementById('send-btn').addEventListener('click', sendMessage);
+document.getElementById('user-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();  // Empêche le saut de ligne par défaut
+        sendMessage();  // Envoie le message
+    }
+});
+
+function sendMessage() {
+    const userInput = document.getElementById('user-input').value;
+    if (!userInput.trim()) return;
+
+    displayMessage('User', userInput);
+    document.getElementById('user-input').value = '';
+
+    // Create a container for the bot's response
+    const botMessageDiv = createMessageContainer('Bot');
+
+    // Create a typing indicator for the bot
+    botMessageDiv.textContent = 'Bot is thinking...';
+
+    /*fetch('http://127.0.0.1:5000/ask', {*/
+    fetch('https://api.llm-solutions.fr/ask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: userInput }),
+    })
+    .then(response => {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        // Remove typing indicator
+        botMessageDiv.textContent = '';
+
+        // Process chunks of text as they arrive
+        function readChunk() {
+            reader.read().then(({ done, value }) => {
+                if (done) {
+                    console.log("Streaming finished");
+                    return;
+                }
+
+                // Decode and append the chunk to the existing message
+                const chunk = decoder.decode(value, { stream: true });
+                appendToMessageContainer(botMessageDiv, chunk);
+
+                // Keep reading chunks
+                readChunk();
+            });
+        }
+
+        readChunk();
+    })
+    .catch(error => {
+        appendToMessageContainer(botMessageDiv, 'Sorry, there was an error.');
+        console.error('Error:', error);
+    });
+}
+
+// Create a message container for the bot or user
+function createMessageContainer(sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', sender.toLowerCase());
+    document.getElementById('messages').appendChild(messageDiv);
+    messageDiv.scrollIntoView();
+    return messageDiv;
+}
+
+// Append chunks to the bot's message container
+function appendToMessageContainer(container, chunk) {
+    container.innerHTML += chunk
+    container.scrollIntoView();  // Scroll to the latest message
+}
+
+function displayMessage(sender, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', sender.toLowerCase());
+    messageDiv.textContent = message;
+
+    document.getElementById('messages').appendChild(messageDiv);
+    messageDiv.scrollIntoView();
+}
+
+function displayStreamedMessage(message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', 'bot');
+    messageDiv.textContent = message;
+    document.getElementById('messages').appendChild(messageDiv);
+    messageDiv.scrollIntoView();
 }
