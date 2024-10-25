@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-24 17:34:17
+* @Last Modified time: 2024-10-25 09:07:51
 */
 
 :root {
@@ -132,6 +132,8 @@ body {
     text-align: center;
 }
 
+/* Header */
+
 header.main-header {
     display: flex;
     justify-content: space-between; /* Space between the logo and the navigation bar */
@@ -179,6 +181,7 @@ header.main-header {
 }
 
 /* Button styles in the menu */
+
 .main-nav li button {
     background: none;
     border: none;
@@ -351,7 +354,6 @@ p {
 .main-footer {
     background-color: var(--header-bg-color);
     padding: 1.25rem 0; /* 20px */
-    color: #999;
     text-align: center;
     width: 100%; /* Ensure the footer takes up the full width */
     position: relative; /* Keep the footer positioned relative to the page */

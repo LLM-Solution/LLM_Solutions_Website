@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-25 08:00:29
+* @Last Modified time: 2024-10-25 08:27:06
 */
 
 // Select items
@@ -192,7 +192,10 @@ function sendMessage() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ question: userInput }),
+        body: JSON.stringify({
+            question: userInput,
+            stream: true,
+        }),
     })
     .then(response => {
         const reader = response.body.getReader();
