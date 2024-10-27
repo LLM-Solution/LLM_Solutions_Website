@@ -20,6 +20,8 @@ Visit the live website: [LLM Solutions](https://llm-solutions.fr)
 
 - **`index.html`**: Main landing page of the website.
 - **`index-en.html`**: English version.
+- **`minichatbot-fr.html`**: A customised chatbot to answer questions about LLM Solutions.
+- **`minichatbot-en.html`**: English version page of MiniChatBot.
 - **`style.css`**: Stylesheet for the website's design, including layout and themes.
 - **`script.js`**: JavaScript for dynamic functionality, including animations and user interactions.
 
