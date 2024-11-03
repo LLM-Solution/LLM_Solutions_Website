@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 11:59:23
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-25 09:07:51
+* @Last Modified time: 2024-11-03 10:08:58
 */
 
 :root {
@@ -306,13 +306,26 @@ h2 {
 
 .btn {
     padding: 1rem;
-    margin: 0rem;
+    /*margin: 0rem;*/
+    margin-top: 3rem;
     background-color: var(--background-color);
     border: none;
     color: var(--primary-color);
+    border: 1px solid var(--hover-color);
     border-radius: 10px;
     transition: background-color 0.3s ease;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    animation: blinking 2s ease-in-out infinite;
+}
+
+@keyframes blinking {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
 }
 
 .btn:hover {
