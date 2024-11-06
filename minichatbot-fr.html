@@ -68,7 +68,26 @@
     <main>
         <section class="chatbot">
             <h1>LLM Solutions</h1>
-            <div class="container">
+            
+            <!-- Authentification -->
+            <div class="container" id="auth-container">
+                <h2>Authentification avec une adresse email</h2>
+                <div id="disclaimer">
+                    <p><strong>Disclaimer:</strong> Pour des raisons de sécurités nous avons besoin de vous authentifier avec une adresse email, un code vous sera envoyé pour accéder à MiniChatBot.</p>
+                    <p>En aucun cas votre adresse email sera utilisées à des fins commercials ou autres.</p>
+                </div>
+                <div id="send-otp-input-container" class="auth-container">
+                    <input type="email" id="email" class="user-input auth-input" placeholder="Entrez votre adresse e-mail" required>
+                    <button class="send-btn auth-btn" onclick="sendOtp()">Envoyer le code</button>
+                </div>
+                <div id="verify-otp-input-container" class="auth-container" style="display: none;">
+                    <input type="text" id="otp" class="user-input auth-input" placeholder="Entrez le code OTP" required>
+                    <button class="send-btn auth-btn" onclick="verifyOtp()" id="verify-btn">Vérifier le code</button>
+                </div>
+            </div>
+
+            <!-- MiniChatBot -->
+            <div class="container" id="chatbot-container" style="display: none;">
                 <h2>MiniChatBot est là pour répondre à vos questions sur nos services</h2>
                 <div id="disclaimer">
                     <p><strong>Disclaimer:</strong> MiniChatBot est un modèle très léger basé sur <b>LLaMa-3.2-1B</b>, réentraîné avec des données générées par un modèle plus grand. Il est conçu spécifiquement pour fournir des informations sur les services offerts par <b>LLM Solutions</b>. Étant donné la taille réduite de MiniChatBot (1 milliard de paramètres seulement), il peut donner des réponses inexactes, ne pas être en mesure de répondre à des questions complexes, et peut parfois produire des informations incorrectes ou "hallucinées".</p>
@@ -77,9 +96,9 @@
                 <div id="chat-window">
                     <div id="messages"></div>
                 </div>
-                <div id="input-container">
-                    <input type="text" id="user-input" placeholder="Posez votre question à MiniChatBot..." autofocus>
-                    <button id="send-btn">Envoyer</button>
+                <div id="chat-input-container" class="input-container">
+                    <input type="text" id="user-input" class="user-input" placeholder="Posez votre question à MiniChatBot..." autofocus>
+                    <button id="send-btn" class="send-btn">Envoyer</button>
                 </div>
             </div>
         </section>

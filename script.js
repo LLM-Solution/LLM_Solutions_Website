@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-09-26 10:04:00
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-10-25 08:27:06
+* @Last Modified time: 2024-11-06 17:35:16
 */
 
 // Select items
@@ -173,6 +173,9 @@ document.getElementById('user-input').addEventListener('keydown', function(event
     }
 });
 
+const API_BASE_URL = 'http://127.0.0.1:5000';
+/*const API_BASE_URL = 'https://api.llm-solutions.fr';*/
+
 function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     if (!userInput.trim()) return;
@@ -186,8 +189,7 @@ function sendMessage() {
     // Create a typing indicator for the bot
     botMessageDiv.textContent = 'Bot is thinking...';
 
-    /*fetch('http://127.0.0.1:5000/ask', {*/
-    fetch('https://api.llm-solutions.fr/ask', {
+    fetch(`${API_BASE_URL}/ask`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -260,3 +262,54 @@ function displayStreamedMessage(message) {
     document.getElementById('messages').appendChild(messageDiv);
     messageDiv.scrollIntoView();
 }
+
+// OTP authentification
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function sendOtp() {
+    const email = document.getElementById('email').value;
+    if (!validateEmail(email)) {
+        alert("Veuillez entrer une adresse e-mail valide.");
+        return;
+    }
+    fetch(`${API_BASE_URL}/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    }).then(response => {
+        if (response.ok) {
+            document.getElementById('verify-otp-input-container').style.display = 'flex';
+        } else {
+            alert('Erreur lors de l\'envoi du code');
+        }
+    });
+}
+
+function verifyOtp() {
+    const email = document.getElementById('email').value;
+    const otp = document.getElementById('otp').value;
+    fetch(`${API_BASE_URL}/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+    }).then(response => {
+        if (response.ok) {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('chatbot-container').style.display = 'block';
+        } else {
+            alert('Code incorrect ou expiré');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is already logger
+    /*if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        document.getElementById('auth-container').style.display = 'none';
+        document.getElementById('chatbot-container').style.display = 'block';
+    }*/
+});
