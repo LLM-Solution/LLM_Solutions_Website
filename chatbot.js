@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-11-06 21:50:25
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-11-06 21:51:14
+* @Last Modified time: 2024-11-07 16:30:58
 */
 
 // MiniChatBot
@@ -21,6 +21,9 @@ function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     if (!userInput.trim()) return;
 
+    const email = sessionStorage.getItem('email');
+    const token = sessionStorage.getItem('sessionToken');
+
     displayMessage('User', userInput);
     document.getElementById('user-input').value = '';
 
@@ -34,13 +37,24 @@ function sendMessage() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
             question: userInput,
-            stream: true,
+            email: email,
+            stream: true
         }),
-    })
-    .then(response => {
+    }).then(response => {
+        if (response.status === 401) {
+            alert("Session expirée. Veuillez vous reconnecter.");
+            console.log("Error 401 - session expired");
+            logout();
+            return;
+        }
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
@@ -65,8 +79,7 @@ function sendMessage() {
         }
 
         readChunk();
-    })
-    .catch(error => {
+    }).catch(error => {
         appendToMessageContainer(botMessageDiv, 'Sorry, there was an error.');
         console.error('Error:', error);
     });
@@ -136,14 +149,23 @@ function verifyOtp() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp })
-    }).then(response => {
-        if (response.ok) {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            document.getElementById('auth-container').style.display = 'none';
-            document.getElementById('chatbot-container').style.display = 'block';
-        } else {
-            alert('Code incorrect ou expiré');
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Code incorrect ou expiré');
         }
+        return response.json();
+    })
+    .then(data => {
+        sessionStorage.setItem('sessionToken', data.token);
+        sessionStorage.setItem('email', email);
+        sessionStorage.setItem('isLoggedIn', 'true');
+        document.getElementById('auth-container').style.display = 'none';
+        document.getElementById('chatbot-container').style.display = 'block';
+    })
+    .catch(error => {
+        console.error('Erreur lors de la vérification du code OTP:', error);
+        alert(error.message);
     });
 }
 
@@ -154,3 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('chatbot-container').style.display = 'block';
     }*/
 });
+
+function logout() {
+    sessionStorage.removeItem('sessionToken');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('isLoggedIn')
+    document.getElementById('auth-container').style.display = 'block';
+    document.getElementById('chatbot-container').style.display = 'none';
+}
