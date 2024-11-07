@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-11-06 21:50:25
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-11-07 18:34:15
+* @Last Modified time: 2024-11-07 19:00:35
 */
 
 // MiniChatBot
@@ -53,6 +53,8 @@ function sendMessage() {
         }
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
+            console.log("Unexpected error");
+            logout();
         }
 
         const reader = response.body.getReader();
@@ -171,13 +173,14 @@ function verifyOtp() {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Check if user is already logger
-    /*if (sessionStorage.getItem('isLoggedIn') === 'true') {
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('auth-container').style.display = 'none';
         document.getElementById('chatbot-container').style.display = 'block';
-    }*/
+    }
 });
 
 function logout() {
+    console.log("Logout")
     sessionStorage.removeItem('sessionToken');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('isLoggedIn')
