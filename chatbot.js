@@ -2,7 +2,7 @@
 * @Author: ArthurBernard
 * @Date:   2024-11-06 21:50:25
 * @Last Modified by:   ArthurBernard
-* @Last Modified time: 2024-11-07 16:30:58
+* @Last Modified time: 2024-11-07 18:34:15
 */
 
 // MiniChatBot
@@ -14,8 +14,8 @@ document.getElementById('user-input').addEventListener('keydown', function(event
     }
 });
 
-const API_BASE_URL = 'http://127.0.0.1:5000';
-/*const API_BASE_URL = 'https://api.llm-solutions.fr';*/
+/*const API_BASE_URL = 'http://127.0.0.1:5000';*/
+const API_BASE_URL = 'https://api.llm-solutions.fr';
 
 function sendMessage() {
     const userInput = document.getElementById('user-input').value;
